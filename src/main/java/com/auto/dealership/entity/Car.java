@@ -29,6 +29,7 @@ public class Car {
     private int year;
 
     private int mileage;
+    private String color;
 
     @Column(precision = 12, scale = 2)
     private BigDecimal price;
