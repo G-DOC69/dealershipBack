@@ -12,9 +12,10 @@ public class CarResponse {
 
     private String brand;
     private String model;
-    private Integer year;
+    private int year;
     private BigDecimal price;
     private String color;
 
     private String photoUrl;
+
 }

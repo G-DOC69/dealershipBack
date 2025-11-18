@@ -17,4 +17,6 @@ public class CarRequest {
     private BigDecimal price;
     private String description;
     private String color;
+    private int year;
+    private int mileage;
 }
