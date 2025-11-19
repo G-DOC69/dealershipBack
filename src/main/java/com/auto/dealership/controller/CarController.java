@@ -11,7 +11,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/cars")
 @RequiredArgsConstructor
 public class CarController {
 
