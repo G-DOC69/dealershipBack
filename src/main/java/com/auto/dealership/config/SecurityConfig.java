@@ -41,7 +41,7 @@ public class SecurityConfig {
                                 "/events/**",
                                 "/admin/login"
                         ).permitAll()
-                        .requestMatchers("/admin/**").authenticated()
+                        .requestMatchers("/admin/**").permitAll()
                         .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session
@@ -60,7 +60,8 @@ public class SecurityConfig {
                 "http://localhost:3032",
                 "http://localhost:4200",
                 "http://localhost:5173",
-                "http://localhost:8080"
+                "http://localhost:8080",
+                "http://localhost:63342"
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));

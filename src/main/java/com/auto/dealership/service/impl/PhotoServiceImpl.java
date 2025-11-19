@@ -66,8 +66,8 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     private void validateFile(MultipartFile file) {
-        if (file.getSize() > 5 * 1024 * 1024) {
-            throw new IllegalArgumentException("Max file size is 5MB");
+        if (file.getSize() > 10 * 1024 * 1024) {
+            throw new IllegalArgumentException("Max file size is 10MB");
         }
         String type = file.getContentType();
         if (!List.of("image/jpeg", "image/png", "image/pdf").contains(type)) {

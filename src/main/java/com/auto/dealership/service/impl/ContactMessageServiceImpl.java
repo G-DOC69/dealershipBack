@@ -22,6 +22,7 @@ public class ContactMessageServiceImpl implements ContactMessageService {
     @Override
     public void createContactMessage(ContactMessageRequest request) {
         ContactMessage contactMessage = contactMessageMapper.toEntity(request);
+        contactMessageRepository.save(contactMessage);
     }
 
     @Override
