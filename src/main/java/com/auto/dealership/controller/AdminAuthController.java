@@ -2,6 +2,7 @@ package com.auto.dealership.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Map;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/admin")
 @RequiredArgsConstructor

@@ -9,4 +9,5 @@ public interface ContactMessageService {
     public void createContactMessage(ContactMessageRequest request);
     public List<ContactMessageResponse> getAllContactMessages();
     public void deleteContactMessage(Long id);
+    public void deleteAllContactMessages();
 }

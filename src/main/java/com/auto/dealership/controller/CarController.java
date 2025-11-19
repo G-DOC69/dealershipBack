@@ -1,23 +1,34 @@
 package com.auto.dealership.controller;
 
-import com.auto.dealership.dto.CarRequest;
+import com.auto.dealership.dto.CarResponse;
+import com.auto.dealership.dto.CarSingularResponse;
 import com.auto.dealership.service.CarService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@Slf4j
 @RestController
+@RequestMapping("/car")
 @RequiredArgsConstructor
 public class CarController {
 
     private final CarService carService;
 
-    @PostMapping("/cars")
-    public ResponseEntity<Long> createCar(@RequestBody CarRequest request) {
-        Long id = carService.createCar(request);
-        return ResponseEntity.ok(id);
+    @GetMapping("/{id}")
+    public CarSingularResponse getCarById(@PathVariable Long id) {
+        return carService.getCar(id);
     }
 
+    @GetMapping("/all")
+    public List<CarResponse> getAllCars() {
+        return carService.getAllCars();
+    }
+
+    @GetMapping("/newest")
+    public List<CarResponse> getNewestCars() {
+        return carService.getNewestCars();
+    }
 }

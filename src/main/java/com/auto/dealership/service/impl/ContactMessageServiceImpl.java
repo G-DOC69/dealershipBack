@@ -38,4 +38,9 @@ public class ContactMessageServiceImpl implements ContactMessageService {
     public void deleteContactMessage(Long id) {
         contactMessageRepository.deleteById(id);
     }
+
+    @Override
+    public void deleteAllContactMessages() {
+        contactMessageRepository.deleteAll();
+    }
 }

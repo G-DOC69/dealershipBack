@@ -22,6 +22,7 @@ public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepo;
     private final CarMapper carMapper;
+    private final CarRepository carRepository;
 
     @Override
     public CarSingularResponse getCar(Long id) {
@@ -29,6 +30,12 @@ public class CarServiceImpl implements CarService {
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found"));
         return carMapper.toDto(car);
+    }
+
+    @Override
+    public Car getCarEntity(Long id) {
+        return carRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Car not found"));
     }
 
     @Override
