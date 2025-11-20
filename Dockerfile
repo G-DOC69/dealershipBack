@@ -1,23 +1,23 @@
-# Build stage: uses Maven + Java 17 to build your Spring Boot project
+# Build stage: Maven + Java 17
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy Maven project files
+# Copy only pom.xml first to cache dependencies
 COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copy source code
 COPY src ./src
 
-# Build Spring Boot app
-RUN mvn -B clean package -DskipTests
+# Build the project
+RUN mvn -B clean package -DskipTests -Dmaven.repo.local=/app/.m2
 
-# Run stage: smaller final image with the built jar
+# Run stage: smaller image
 FROM eclipse-temurin:17-jdk
 WORKDIR /app
 
-# Copy jar from build stage
+# Copy built jar
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose the port your app runs on
 EXPOSE 8080
-
-# Start the Spring Boot app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Xmx256m", "-jar", "app.jar"]
