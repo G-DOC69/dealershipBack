@@ -58,7 +58,8 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:3032",
-                "http://localhost:4200",
+                "https://pe69ita.githu.io/dship",
+                "https://pe69ita.githu.io",
                 "http://localhost:5173",
                 "http://localhost:8080",
                 "http://localhost:63342"
