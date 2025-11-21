@@ -1,23 +1,26 @@
-# ===========================
-# Build Stage (JDK 25 + Maven)
-# ===========================
-FROM eclipse-temurin:25-jdk AS build
+# =====================================
+# Build Stage (Maven + JDK 25)
+# =====================================
+FROM maven:3.9.6-eclipse-temurin-25 AS build
 WORKDIR /app
 
+# Copy Maven project files
 COPY pom.xml .
 COPY src ./src
 
-# Build Spring Boot (try mvnw first, fallback to Maven)
-RUN ./mvnw -q -B package -DskipTests || mvn -q -B package -DskipTests
+# Build Spring Boot application
+RUN mvn -q -B package -DskipTests
 
-# ===========================
+# =====================================
 # Run Stage (JRE 25)
-# ===========================
+# =====================================
 FROM eclipse-temurin:25-jre
 WORKDIR /app
 
+# Copy JAR from build stage
 COPY --from=build /app/target/*.jar app.jar
 
+# Koyeb dynamic port support
 ENV PORT=8080
 EXPOSE 8080
 
