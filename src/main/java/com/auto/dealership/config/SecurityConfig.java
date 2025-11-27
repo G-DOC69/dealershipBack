@@ -30,7 +30,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configurationSource(myWebsiteConfigurationSource()))
+                .cors(AbstractHttpConfigurer::disable)
+//                .cors(cors -> cors.configurationSource(myWebsiteConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/", "/favicon.ico",
