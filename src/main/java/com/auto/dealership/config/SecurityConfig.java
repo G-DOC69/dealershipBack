@@ -30,7 +30,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable) // 🔥 disable CORS completely
+                .cors(cors -> cors.configurationSource(myWebsiteConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/", "/favicon.ico",
@@ -50,7 +50,6 @@ public class SecurityConfig {
                 .addFilterBefore(adminSessionFilter, UsernamePasswordAuthenticationFilter.class)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable);
-
         return http.build();
     }
 
@@ -59,8 +58,10 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:3032",
-                "https://pe69ita.githu.io/dship",
-                "https://pe69ita.githu.io",
+                "https://pe69ita.github.io/dship",
+                "https://pe69ita.github.io",
+                "https://github.io",
+                "https://github.io/dship",
                 "http://localhost:5173",
                 "http://localhost:8080",
                 "http://localhost:63342"
