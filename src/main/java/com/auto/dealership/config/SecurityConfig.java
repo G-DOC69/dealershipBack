@@ -30,8 +30,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
-//                .cors(cors -> cors.configurationSource(myWebsiteConfigurationSource()))
+                .cors(AbstractHttpConfigurer::disable) // 🔥 disable CORS completely
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/", "/favicon.ico",
@@ -51,6 +50,7 @@ public class SecurityConfig {
                 .addFilterBefore(adminSessionFilter, UsernamePasswordAuthenticationFilter.class)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable);
+
         return http.build();
     }
 
